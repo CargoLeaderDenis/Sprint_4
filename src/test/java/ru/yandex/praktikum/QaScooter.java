@@ -48,11 +48,13 @@ public class QaScooter {
         assertTrue("Ответ отображается!", answer0.isDisplayed());
         assertTrue("Текст ответа верный", answer0.getText().contains("Сутки — 400 рублей. Оплата курьеру — наличными или картой"));
 
+
         var question1 = wait.until(ExpectedConditions.elementToBeClickable(By.id("accordion__heading-1")));
         question1.click();
         var answer1 = wait.until(ExpectedConditions.elementToBeClickable(By.id("accordion__panel-1")));
         assertTrue("Ответ отображается!", answer1.isDisplayed());
         assertTrue("Текст ответа верный", answer1.getText().contains("Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим"));
+
 
         var question2 = wait.until(ExpectedConditions.elementToBeClickable(By.id("accordion__heading-2")));
         question2.click();
