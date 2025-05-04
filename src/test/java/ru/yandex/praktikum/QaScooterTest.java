@@ -17,7 +17,7 @@ public class QaScooterTest {
 
     @Before
     public void setup() {
-        driver = new FirefoxDriver(); // Можно внедрить BrowserFactory
+        driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.get("https://qa-scooter.praktikum-services.ru/");
         mainPage = new MainPage(driver, wait);
