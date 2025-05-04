@@ -9,6 +9,7 @@ import ru.yandex.praktikum.pages.OrderPage;
 
 import java.time.Duration;
 
+
 public class QaScooterTest {
     private WebDriver driver;
     private WebDriverWait wait;
