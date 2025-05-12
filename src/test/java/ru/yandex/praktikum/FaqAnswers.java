@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.tests;
 
+
 public class FaqAnswers {
     public static final String[] EXPECTED_ANSWERS = {
             "Сутки — 400 рублей. Оплата курьеру",

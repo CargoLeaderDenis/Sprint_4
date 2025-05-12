@@ -36,7 +36,6 @@ public class OrderPage {
         driver.findElement(By.xpath("//button[text()='Заказать']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Да']"))).click();
     }
-
     public boolean isConfirmationVisible() {
         return wait.until(ExpectedConditions.textToBePresentInElementLocated(
                 By.xpath("//div[contains(text(), 'Заказ оформлен')]"),

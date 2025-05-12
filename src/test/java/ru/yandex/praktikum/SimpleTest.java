@@ -24,7 +24,6 @@ public class SimpleTest {
         mainPage = new MainPage(driver, wait);
         orderPage = new OrderPage(driver, wait);
     }
-
     @After
     public void tearDown() {
         driver.quit();
