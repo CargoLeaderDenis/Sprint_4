@@ -23,7 +23,6 @@ public class OrderPage {
         driver.findElement(By.xpath("//input[@placeholder='* Телефон: на него позвонит курьер']")).sendKeys(phone);
         driver.findElement(By.xpath("//button[text()='Далее']")).click();
     }
-
     public void fillRentalInfo(String date, String period, String color, String comment) {
         WebElement dateInput = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@placeholder='* Когда привезти самокат']")));
         dateInput.sendKeys(date);

@@ -15,6 +15,7 @@ public class MainPageOrderTest extends ru.yandex.praktikum.tests.SimpleTest {
             mainPage.expandFaqAndCheckAnswer(i, ru.yandex.praktikum.tests.FaqAnswers.EXPECTED_ANSWERS[i]);
         }
     }
+
     @Test
     public void createOrderTest() {
         mainPage.clickOrderButton();
