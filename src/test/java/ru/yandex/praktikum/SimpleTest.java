@@ -2,19 +2,21 @@ package ru.yandex.praktikum.tests;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.praktikum.pages.MainPage;
 import ru.yandex.praktikum.pages.OrderPage;
-
 import java.time.Duration;
 
 public class SimpleTest {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriver driver;
+    public WebDriverWait wait;
     protected MainPage mainPage;
-    protected OrderPage orderPage;
+    public OrderPage orderPage;
+    int index;
+    String expectedAnswer;
 
 
     @Before
@@ -24,9 +26,16 @@ public class SimpleTest {
         driver.get("https://qa-scooter.praktikum-services.ru/");
         mainPage = new MainPage(driver, wait);
         orderPage = new OrderPage(driver, wait);
-    }
-    @After
-    public void tearDown() {
-        driver.quit();
+
     }
 }
+    //*@Test
+    //public void MainPageVoprosiovajnomTest() {
+     //   mainPage.acceptCookies();
+      //  mainPage.expandFaqAndCheckAnswer(index, expectedAnswer);
+    //}
+
+    //@After
+    //public void tearDown() {
+     //   driver.quit();
+    //}
