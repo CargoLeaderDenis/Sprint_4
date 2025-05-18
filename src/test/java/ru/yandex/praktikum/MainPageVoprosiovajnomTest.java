@@ -6,7 +6,10 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.praktikum.pages.MainPage;
+import ru.yandex.praktikum.MainPage.MainPage;
+import org.junit.Before;
+import org.junit.After;
+import java.time.Duration;
 
 @RunWith(Parameterized.class)
 public class MainPageVoprosiovajnomTest   {  //extends ru.yandex.praktikum.tests.SimpleTest {

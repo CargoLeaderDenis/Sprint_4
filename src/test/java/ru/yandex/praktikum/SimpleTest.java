@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.praktikum.pages.MainPage;
+import ru.yandex.praktikum.MainPage.MainPage;
 import ru.yandex.praktikum.pages.OrderPage;
 import java.time.Duration;
 
@@ -22,7 +22,7 @@ public class SimpleTest {
     @Before
     public void setUp() {
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://qa-scooter.praktikum-services.ru/");
         mainPage = new MainPage(driver, wait);
         orderPage = new OrderPage(driver, wait);

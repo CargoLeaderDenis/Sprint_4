@@ -1,4 +1,5 @@
 package ru.yandex.praktikum.tests;
+//package ru.yandex.praktikum.FaqAnswers;
 
 public class FaqAnswers {
     public static final String[] EXPECTED_ANSWERS = {
