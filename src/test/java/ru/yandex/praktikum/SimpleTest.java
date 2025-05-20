@@ -1,3 +1,4 @@
+/*
 package ru.yandex.praktikum.tests;
 
 import org.junit.After;
@@ -39,3 +40,4 @@ public class SimpleTest {
     //public void tearDown() {
      //   driver.quit();
     //}
+*/

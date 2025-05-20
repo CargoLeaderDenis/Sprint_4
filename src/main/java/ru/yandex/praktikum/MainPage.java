@@ -1,54 +1,62 @@
-package ru.yandex.praktikum.MainPage;
+package ru.yandex.praktikum.pageobjects;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class MainPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private static final String QUESTION_ID_PREFIX = "accordion__heading-";
-    private static final String ANSWER_ID_PREFIX = "accordion__panel-";
-    private static final String COOKIE_BUTTON_CLASS = "App_CookieButton__3cvqF";
-    private static final String ORDER_BUTTON_SELECTOR = ".Button_Button__ra12g";
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
+    // Локаторы
+    private final By cookieButton = By.className("App_CookieButton__3cvqF");
+    private final By topOrderButton = By.cssSelector(".Button_Button__ra12g");
+    private final By bottomOrderButton = By.cssSelector(".Home_FinishButton__1_cWm");
 
-    public MainPage(WebDriver driver, WebDriverWait wait) {
+    // Шаблоны локаторов для FAQ
+    private final String accordionHeadingTemplate = "accordion__heading-%d";
+    private final String accordionPanelTemplate = "accordion__panel-%d";
+
+    public MainPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = wait;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
-    private final By cookieButton = By.className(COOKIE_BUTTON_CLASS);
-    private final By orderButton = By.cssSelector(ORDER_BUTTON_SELECTOR);
-
+    public void open() {
+        driver.get("https://qa-scooter.praktikum-services.ru/");
+    }
 
     public void acceptCookies() {
-        wait.until(ExpectedConditions.elementToBeClickable(cookieButton)).click();
+        driver.findElement(cookieButton).click();
     }
 
-    public void clickOrderButton() {
-        driver.findElement(orderButton).click();
+    public void clickTopOrderButton() {
+        driver.findElement(topOrderButton).click();
     }
 
-    public static By getQuestionByIndex(int index) {
-        return By.id(QUESTION_ID_PREFIX + index);
+    public void clickBottomOrderButton() {
+        driver.findElement(bottomOrderButton).click();
     }
 
-    public static By getAnswerByIndex(int index) {
-        return By.id(ANSWER_ID_PREFIX + index);
+    public void clickFaqQuestion(int questionIndex) {
+        WebElement question = wait.until(ExpectedConditions.elementToBeClickable(
+                By.id(String.format(accordionHeadingTemplate, questionIndex))));
+        question.click();
     }
 
-    public void expandFaqAndCheckAnswer(int index, String expectedText) {
-        By question = getQuestionByIndex(index);
-        By answer = getAnswerByIndex(index);
+    public String getFaqAnswerText(int questionIndex) {
+        WebElement answer = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id(String.format(accordionPanelTemplate, questionIndex))));
+        return answer.getText();
+    }
 
-        wait.until(ExpectedConditions.elementToBeClickable(question)).click();
-        WebElement answerElement = wait.until(ExpectedConditions.visibilityOfElementLocated(answer));
-
-        String actualText = answerElement.getText();
-        assertEquals("Ответ на вопрос с индексом " + index + " не соответствует ожидаемому.", expectedText, actualText);
-        }
+    public boolean isFaqAnswerDisplayed(int questionIndex) {
+        WebElement answer = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.id(String.format(accordionPanelTemplate, questionIndex))));
+        return answer.isDisplayed();
+    }
 }
