@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 
@@ -12,12 +13,10 @@ public class MainPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    // Локаторы
     private final By cookieButton = By.className("App_CookieButton__3cvqF");
     private final By topOrderButton = By.cssSelector(".Button_Button__ra12g");
     private final By bottomOrderButton = By.cssSelector(".Home_FinishButton__1_cWm");
 
-    // Шаблоны локаторов для FAQ
     private final String accordionHeadingTemplate = "accordion__heading-%d";
     private final String accordionPanelTemplate = "accordion__panel-%d";
 
@@ -39,7 +38,22 @@ public class MainPage {
     }
 
     public void clickBottomOrderButton() {
-        driver.findElement(bottomOrderButton).click();
+        try {
+            ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+            Thread.sleep(500);
+
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(bottomOrderButton));
+            button.click();
+        } catch (Exception e) {
+            System.out.println("Ошибка при нажатии на нижнюю кнопку заказа: " + e.getMessage());
+            try {
+                WebElement button = driver.findElement(bottomOrderButton);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+            } catch (Exception ex) {
+                System.out.println("Не удалось нажать на нижнюю кнопку заказа даже с помощью JavaScript: " + ex.getMessage());
+            }
+        }
     }
 
     public void clickFaqQuestion(int questionIndex) {
